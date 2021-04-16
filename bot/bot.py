@@ -33,7 +33,7 @@ def store_last_seen(FILE_NAME, last_seen_id):
 appreciations = [
     "You're looking absolutely gorgeous today ;)",
     "Here's a bonus hug from me!",
-    "Go drink some water!"
+    "Go drink some water!",
     "I love your tweets!",
     "You're awesome",
     "Should I be worried that my creator is a dumbass?",
@@ -52,7 +52,7 @@ def reply():
     # stored in the text file
     tweets = api.mentions_timeline(read_last_seen(FILE_NAME), tweet_mode='extended')
     for tweet in reversed(tweets):
-        if 'pat' in tweet.full_text.lower():
+        if '#pat' in tweet.full_text.lower():
             print("Pattted!: " + str(tweet.id) + " - " + tweet.full_text.lower())
             api.update_with_media(GIF, "@"+ tweet.user.screen_name + " pat pat" + "\nPS: " + random_appreciation(), in_reply_to_status_id=tweet.id)
             api.create_favorite(tweet.id) # Like the tweet with mentions

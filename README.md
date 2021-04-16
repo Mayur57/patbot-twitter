@@ -3,6 +3,8 @@
 # The Pat Pat Bot ❤️
 A bot that replies to the tweets it is mentioned in with a GIF file made using Python-3 (Tweepy) and [Twitter APIs](https://developer.twitter.com/). This is a quick mini-project I made in an hour to learn Twitter API and have some fun exploring the Twitter tools.
 
+To get a response, just tweet ```@patPatBot_ #pat``` and wait!
+
 ### How Do I Run It?
 - Make sure you have Python v3+ installed
 - Install tweepy using ```pip3 install --user tweepy```
