@@ -16,7 +16,7 @@ GIF = 'pat-pat.gif'
 api = tweepy.API(auth)
 
 # This function will open the text file and return the ID of
-# the latest tweet the bot has successfully replied to 
+# the latest tweet the bot has successfully replied to
 def read_last_seen(FILE_NAME):
     file_read = open(FILE_NAME, 'r')
     last_seen_id = int(file_read.read().strip())
@@ -55,8 +55,18 @@ def reply():
         if '#pat' in tweet.full_text.lower():
             print("Pattted!: " + str(tweet.id) + " - " + tweet.full_text.lower())
             api.update_with_media(GIF, "@"+ tweet.user.screen_name + " pat pat" + "\nPS: " + random_appreciation(), in_reply_to_status_id=tweet.id)
-            api.create_favorite(tweet.id) # Like the tweet with mentions
             store_last_seen(FILE_NAME, tweet.id)
+
+        elif '@patpatbot_' == tweet.full_text.lower().strip() or '.@patpatbot_' == tweet.full_text.lower().strip():
+            print("Suggested!: " + str(tweet.id) + " - " + tweet.full_text.lower())
+            api.update_status("Hey @"+ tweet.user.screen_name + "! Use #pat to get a pat", in_reply_to_status_id=tweet.id)
+            store_last_seen(FILE_NAME, tweet.id)
+
+        elif '#pat' not in tweet.full_text.lower():
+            print("Liked!: " + str(tweet.id) + " - " + tweet.full_text.lower())
+            store_last_seen(FILE_NAME, tweet.id)
+
+        api.create_favorite(tweet.id) # Like the tweet with mentions
 
 
 """
